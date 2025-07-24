@@ -1,20 +1,21 @@
-﻿# Etapa 1: build
+﻿# Etapa 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copiar el archivo del proyecto primero (ajustado a tu nombre)
-COPY DumontPin.csproj ./
-
-# Restaurar dependencias
+# Copiamos solo el .csproj desde la carpeta
+COPY DumontPin/DumontPin.csproj DumontPin/
+WORKDIR /app/DumontPin
 RUN dotnet restore
 
-# Copiar el resto del contenido
-COPY . ./
+# Copiamos todo el código
+WORKDIR /app
+COPY . .
 
-# Publicar la aplicación
+# Publicamos la app desde la carpeta del proyecto
+WORKDIR /app/DumontPin
 RUN dotnet publish -c Release -o /out
 
-# Etapa 2: runtime
+# Etapa 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
