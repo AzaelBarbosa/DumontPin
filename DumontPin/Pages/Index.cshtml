@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Generador de PIN";
+}
+
+<div style="max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 12px; background-color: #f9f9f9; box-shadow: 0 0 10px rgba(0,0,0,0.1); font-family: Arial, sans-serif;">
+    <form method="post">
+        <label for="usuario" style="display:block; margin-bottom:5px; font-weight:bold;">Selecciona un usuario:</label>
+        <select id="usuario" name="usuario" required style="width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;">
+            <option value="">-- Selecciona un usuario --</option>
+            @foreach (var u in Model.Usuarios)
+            {
+                if (Model.UsuarioSeleccionado == u)
+                {
+                    <option value="@u" selected="selected">@u</option>
+                }
+                else
+                {
+                    <option value="@u">@u</option>
+                }
+            }
+        </select>
+
+        <button type="submit" style="width:100%; padding:10px; background-color:#007bff; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">
+            Generar PIN
+        </button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.PinGenerado))
+    {
+        <div style="margin-top:20px; text-align:center;">
+            <p style="font-size: 1.2em;"><strong>PIN generado:</strong></p>
+            <div style="font-size: 2em; font-weight: bold; color: #28a745;">@Model.PinGenerado</div>
+        </div>
+    }
+</div>
