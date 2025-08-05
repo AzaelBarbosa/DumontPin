@@ -8,7 +8,7 @@ namespace DumontPin.Pages
     public class IndexModel : PageModel
     {
         public string claveSecreta = "Dumont";
-        public List<string> Usuarios { get; set; } = new() { "Norita", "Nora", "Administrador" };
+        public List<string> Usuarios { get; set; } = new() { "Conta" };
         public string UsuarioSeleccionado { get; set; }
         public string PinGenerado { get; set; }
         private readonly ILogger<IndexModel> _logger;
